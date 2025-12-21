@@ -2271,6 +2271,17 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
             // Заполнить контент лечения, если данные доступны
             if (currentContourData && currentContourData.treatment) {
                 renderTreatmentContent(currentContourData.treatment);
+            } else {
+                // Заглушка для контуров без данных о лечении
+                document.getElementById('modal-treatment-content').innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
+                        <span class="material-symbols-outlined text-6xl text-coffee-muted mb-4">construction</span>
+                        <h5 class="text-xl font-bold text-coffee-primary mb-2">Раздел в разработке</h5>
+                        <p class="text-sm text-coffee-medium leading-relaxed max-w-md">
+                            Рекомендации по изменениям контуров управления для этого раздела находятся в процессе подготовки.
+                        </p>
+                    </div>
+                `;
             }
         }
     }
