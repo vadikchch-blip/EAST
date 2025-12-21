@@ -1092,10 +1092,28 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
  <div class="lg:w-2/3 bg-coffee-surface p-8 md:p-10 overflow-y-auto custom-scrollbar relative">
  <div class="absolute top-0 right-0 w-32 h-32 tribal-pattern opacity-10 pointer-events-none"></div>
  
- <h4 class="text-xs font-black text-coffee-accent uppercase tracking-widest mb-8 flex items-center gap-3">
- <span class="material-symbols-outlined text-lg">analytics</span> 
- Диагностика и Анализ
+ <!-- Кнопки переключения -->
+ <div class="flex items-center justify-between mb-8">
+ <h4 class="text-xs font-black text-coffee-accent uppercase tracking-widest flex items-center gap-3">
+ <span class="material-symbols-outlined text-lg" id="modal-tab-icon">analytics</span> 
+ <span id="modal-tab-title">Диагностика и Анализ</span>
  </h4>
+ 
+ <div class="flex gap-2 bg-coffee-bg p-1 rounded-xl border border-coffee-divider">
+ <button 
+ id="tab-diagnostic-btn"
+ onclick="switchTab('diagnostic')" 
+ class="px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all bg-coffee-primary text-coffee-surface shadow-md">
+ Диагностика
+ </button>
+ <button 
+ id="tab-treatment-btn"
+ onclick="switchTab('treatment')" 
+ class="px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all text-coffee-muted hover:text-coffee-primary">
+ Лечение
+ </button>
+ </div>
+ </div>
  
  <div id=modal-diagnostic-content class=max-w-3xl>
  <div class="bg-coffee-bg p-6 rounded-2xl border border-coffee-divider shadow-sm mb-8">
@@ -1124,6 +1142,10 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
  <p class="text-sm text-coffee-primary font-medium leading-relaxed bg-white/50 p-4 rounded-xl border border-coffee-divider/20">Отсутствуют регулярные встречи для синхронизации картин мира. Обратная связь дается только в момент кризиса.</p>
  </div>
  </div>
+ </div>
+ 
+ <div id=modal-treatment-content class="max-w-3xl hidden">
+ <!-- Контент лечения будет заполняться динамически -->
  </div>
  </div>
  </div>
@@ -1168,6 +1190,27 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
                         content: "ЦА формулируется как 'интересные люди', но доход приносят другие сегменты. Бурный рост сети обгоняет способность системы структурировать процессы, создавая управленческий долг." 
                     }
                 ]
+            },
+            treatment: {
+                owner: "Собственники + Управляющий",
+                summary: "Формализация критериев успеха и создание тиражируемой модели открытия точек.",
+                sections: [
+                    {
+                        title: "1. Формализация стратегии",
+                        summary: "Создание документа стратегии развития сети с четкими критериями.",
+                        content: "Необходимо зафиксировать критерии успешной точки: минимальный трафик, размер помещения, допустимая арендная ставка, целевая окупаемость. Создать чек-лист оценки локации, включающий демографические данные, конкурентное окружение, логистику поставок."
+                    },
+                    {
+                        title: "2. Делегирование управляющему",
+                        summary: "Передача части полномочий по оперативным решениям.",
+                        content: "Управляющий должен получить право инициировать открытие точек в рамках утвержденных критериев, участвовать в выборе локаций и форматов. Собственники сохраняют право финального утверждения, но перестают быть единственным источником инициатив."
+                    },
+                    {
+                        title: "3. Метрики и контроль",
+                        summary: "Внедрение системы отслеживания эффективности точек.",
+                        content: "Создать систему мониторинга ключевых показателей каждой точки: выручка на кв.м., средний чек, проходимость, конверсия. Проводить ежемесячный анализ для выявления паттернов успешных и проблемных локаций, корректировки стратегии открытий."
+                    }
+                ]
             }
         },
         {
@@ -1209,6 +1252,32 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
                         title: "5. Состояние и Переходная модель", 
                         summary: "Рост сети опережает формализацию экономики.",
                         content: "Контур не требует срочной реформы, пока собственники включены 24/7. Однако экономика сейчас не управляет системой, а лишь фиксирует результаты. Для масштабирования необходим переход от 'реактивного' планирования к методическому бюджетированию." 
+                    }
+                ]
+            },
+            treatment: {
+                owner: "Собственники + Финансовый контролер",
+                summary: "Внедрение системы бюджетирования и делегирование оперативных финансовых решений.",
+                sections: [
+                    {
+                        title: "1. Формализация финансовых лимитов",
+                        summary: "Установка целевых показателей Food Cost, Labor Cost и маржинальности.",
+                        content: "Зафиксировать целевые показатели: Food Cost не выше 30%, Labor Cost 25-28%, целевая маржинальность по категориям продукции. Создать систему еженедельного мониторинга и отклонений. Ввести понятные правила списаний с утверждёнными лимитами на точку/месяц."
+                    },
+                    {
+                        title: "2. Система бюджетирования",
+                        summary: "Переход от ситуативного управления к плановому бюджетированию.",
+                        content: "Внедрить квартальное планирование с разбивкой бюджетов по статьям: ФОТ, маркетинг, ремонт, оборудование. Управляющий получает право распоряжаться бюджетом в рамках лимитов без согласования каждой транзакции. Ежемесячный финансовый review с анализом план-факт."
+                    },
+                    {
+                        title: "3. Делегирование ценовой политики",
+                        summary: "Управляющий получает право на локальные акции в рамках утверждённых правил.",
+                        content: "Создать матрицу полномочий: управляющий может давать скидку до 15% без согласования, акции на определённые категории по утверждённому календарю. Собственники утверждают базовое ценообразование и стратегические изменения цен, но освобождаются от микроменеджмента."
+                    },
+                    {
+                        title: "4. Контроль фрода и списаний",
+                        summary: "Внедрение прозрачной системы учёта с регулярными инвентаризациями.",
+                        content: "Еженедельные инвентаризации с автоматическим расчётом отклонений. Установить допустимый процент потерь (например, 2% от выручки). При превышении — расследование причин, а не автоматическое списание на персонал. Это снизит HR-напряжение и даст реальную картину потерь."
                     }
                 ]
             }
@@ -2070,6 +2139,9 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
         const data = contoursData.find(c => c.id === id);
         if (!data) return;
         
+        // Сохраняем текущие данные контура для переключения вкладок
+        currentContourData = data;
+        
         const style = statusConfig[data.status];
         
         // Заполнение базовой информации
@@ -2137,6 +2209,9 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
             `;
         }
 
+        // Сбросить на вкладку "Диагностика" при открытии модального окна
+        switchTab('diagnostic');
+
         // Анимация открытия
         const overlay = document.getElementById('modal-overlay');
         const container = document.getElementById('modal-container');
@@ -2155,6 +2230,100 @@ a);requestAnimationFrame(function(){g(document.body)})})}var l=["material-icons"
         setTimeout(() => {
             overlay.classList.add('hidden');
         }, 300);
+    }
+
+    // Переключение между вкладками Диагностика/Лечение
+    let currentContourData = null;
+    
+    function switchTab(tabName) {
+        const diagnosticContent = document.getElementById('modal-diagnostic-content');
+        const treatmentContent = document.getElementById('modal-treatment-content');
+        const diagnosticBtn = document.getElementById('tab-diagnostic-btn');
+        const treatmentBtn = document.getElementById('tab-treatment-btn');
+        const tabIcon = document.getElementById('modal-tab-icon');
+        const tabTitle = document.getElementById('modal-tab-title');
+        
+        if (tabName === 'diagnostic') {
+            // Показать диагностику
+            diagnosticContent.classList.remove('hidden');
+            treatmentContent.classList.add('hidden');
+            
+            // Обновить стили кнопок
+            diagnosticBtn.className = 'px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all bg-coffee-primary text-coffee-surface shadow-md';
+            treatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all text-coffee-muted hover:text-coffee-primary';
+            
+            // Обновить заголовок
+            tabIcon.innerText = 'analytics';
+            tabTitle.innerText = 'Диагностика и Анализ';
+        } else if (tabName === 'treatment') {
+            // Показать лечение
+            diagnosticContent.classList.add('hidden');
+            treatmentContent.classList.remove('hidden');
+            
+            // Обновить стили кнопок
+            diagnosticBtn.className = 'px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all text-coffee-muted hover:text-coffee-primary';
+            treatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all bg-coffee-primary text-coffee-surface shadow-md';
+            
+            // Обновить заголовок
+            tabIcon.innerText = 'medical_services';
+            tabTitle.innerText = 'Изменения контуров управления';
+            
+            // Заполнить контент лечения, если данные доступны
+            if (currentContourData && currentContourData.treatment) {
+                renderTreatmentContent(currentContourData.treatment);
+            } else {
+                // Заглушка для контуров без данных о лечении
+                document.getElementById('modal-treatment-content').innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-16 px-8 text-center">
+                        <span class="material-symbols-outlined text-6xl text-coffee-muted mb-4">construction</span>
+                        <h5 class="text-xl font-bold text-coffee-primary mb-2">Раздел в разработке</h5>
+                        <p class="text-sm text-coffee-medium leading-relaxed max-w-md">
+                            Рекомендации по изменениям контуров управления для этого раздела находятся в процессе подготовки.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+    }
+    
+    function renderTreatmentContent(treatment) {
+        const sections = treatment.sections.map(s => `
+            <div class="relative pl-6 py-1 group">
+                <div class="absolute left-0 top-2 w-1 h-full bg-coffee-divider group-hover:bg-coffee-secondary transition-colors rounded-full"></div>
+                <h5 class="text-xs font-black text-coffee-secondary uppercase tracking-widest mb-1">${s.title}</h5>
+                
+                <div class="bg-white/50 p-4 rounded-xl border border-coffee-divider/20 shadow-sm">
+                    <p class="text-sm text-coffee-primary font-bold leading-relaxed mb-2">${s.summary || 'Нажмите, чтобы развернуть анализ'}</p>
+                    
+                    <details class="group/details">
+                        <summary class="list-none cursor-pointer text-[10px] font-black uppercase tracking-tighter text-coffee-secondary hover:text-coffee-primary flex items-center gap-1 outline-none">
+                            <span class="group-open/details:hidden">▼ Развернуть подробное описание</span>
+                            <span class="hidden group-open/details:inline">▲ Свернуть описание</span>
+                        </summary>
+                        <div class="mt-3 pt-3 border-t border-coffee-divider/20 text-sm text-coffee-medium leading-relaxed italic">
+                            ${s.content}
+                        </div>
+                    </details>
+                </div>
+            </div>
+        `).join('');
+
+        document.getElementById('modal-treatment-content').innerHTML = `
+            <div class="bg-coffee-bg p-6 rounded-2xl border border-coffee-divider shadow-sm mb-8">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-coffee-secondary">build</span>
+                    <span class="text-[10px] font-black text-coffee-muted uppercase tracking-widest">Ответственный за внедрение</span>
+                </div>
+                <span class="text-xl font-extrabold text-coffee-primary">${treatment.owner}</span>
+            </div>
+            
+            <div class="mb-10 relative">
+                <span class="text-6xl absolute -top-6 -left-4 text-coffee-secondary opacity-10 font-serif">"</span>
+                <p class="text-lg text-coffee-secondary font-bold italic leading-relaxed relative z-10 ml-4">${treatment.summary}</p>
+            </div>
+            
+            <div class="space-y-6">${sections}</div>
+        `;
     }
 
     // Закрытие по клику на фон
